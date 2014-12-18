@@ -21,7 +21,7 @@
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="emailer:local:port">User</label>
+					<label for="emailer:local:port">Port</label>
 					<input type="text" class="form-control" value="25" id="emailer:local:port" data-field="emailer:local:port" />
 				</div>
 			</div>
@@ -46,7 +46,7 @@
 </form>
 
 <script type="text/javascript">
-	require(['forum/admin/settings'], function(Settings) {
+	require(['admin/settings'], function(Settings) {
 		Settings.prepare();
 	});
 </script>

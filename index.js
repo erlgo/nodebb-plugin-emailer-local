@@ -3,26 +3,32 @@ var fs = require('fs'),
 
     winston = module.parent.require('winston'),
     Meta = module.parent.require('./meta'),
-
-    nodemailer = require('nodemailer'),
     Emailer = {};
+    var nodemailer = require('nodemailer');
+    var smtpTransport = require('nodemailer-smtp-transport');
 
-
-Emailer.init = function(app, middleware, controllers) {
+Emailer.init = function(args,callback) {
+  var app = args.router,
+  middleware = args.middleware,
+  controllers = args.controllers;
     function renderAdminPage(req, res, next) {
         res.render('admin/emailers/local', {});
     }
 
-    app.get('/admin/emailers/local', middleware.admin.buildHeader, renderAdminPage);
+    app.get('/admin/emailers/local', middleware.admin.buildHeader,[], renderAdminPage);
     app.get('/api/admin/emailers/local', renderAdminPage);
+
+
+    callback();
 };
 
 Emailer.send = function(data) {
     var username = Meta.config['emailer:local:username'];
     var pass = Meta.config['emailer:local:password'];
     var transportOptions = {
+      secure: true,
         host: Meta.config['emailer:local:host'],
-        port: Meta.config['emailer:local:port']
+        port: parseInt(Meta.config['emailer:local:port'],10)
     };
     if( username || pass ) {
         transportOptions.auth = {
@@ -30,8 +36,7 @@ Emailer.send = function(data) {
             pass: pass
         };
     }
-    var transport = nodemailer.createTransport('SMTP', transportOptions);
-
+    var transport = nodemailer.createTransport(smtpTransport(transportOptions));
     transport.sendMail({
         from: data.from,
         to: data.to,
@@ -43,7 +48,6 @@ Emailer.send = function(data) {
             winston.info('[emailer.smtp] Sent `' + data.template + '` email to uid ' + data.uid);
         } else {
             winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + '!!');
-            // winston.error('[emailer.smtp] ' + response.message);
         }
     });
 }
