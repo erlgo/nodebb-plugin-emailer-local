@@ -1,7 +1,7 @@
 {
     "id": "nodebb-plugin-emailer-ssl-smtp",
     "url": "https://github.com/erlgo/nodebb-plugin-emailer-ssl-smtp",
-    "name": "Emailer (Local)",
+    "name": "Emailer (Local)Smtp SSL",
     "description": "Allows NodeBB to send emails via SMTP ssl",
     "library": "./index.js",
     "templates": "./templates",

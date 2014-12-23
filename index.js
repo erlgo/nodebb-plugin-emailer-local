@@ -55,9 +55,9 @@ Emailer.send = function(data) {
 Emailer.admin = {
     menu: function(custom_header, callback) {
         custom_header.plugins.push({
-            "route": '/emailers/local',
+            "route": '/emailers/smtpssl',
             "icon": 'fa-envelope-o',
-            "name": 'Emailer (Local)'
+            "name": 'Emailer (Local)Smtp SSL'
         });
 
         callback(null, custom_header);

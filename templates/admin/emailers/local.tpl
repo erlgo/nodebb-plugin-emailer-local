@@ -1,4 +1,4 @@
-<h1><i class="fa fa-envelope-o"></i> Emailer (Local)</h1>
+<h1><i class="fa fa-envelope-o"></i> Emailer (Local) Smtp SSL</h1>
 
 <div class="row">
 	<div class="col-lg-12">
