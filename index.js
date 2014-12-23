@@ -12,11 +12,11 @@ Emailer.init = function(args,callback) {
   middleware = args.middleware,
   controllers = args.controllers;
     function renderAdminPage(req, res, next) {
-        res.render('admin/emailers/local', {});
+        res.render('admin/emailers/smtpssl', {});
     }
 
-    app.get('/admin/emailers/local', middleware.admin.buildHeader,[], renderAdminPage);
-    app.get('/api/admin/emailers/local', renderAdminPage);
+    app.get('/admin/emailers/smtpssl', middleware.admin.buildHeader,[], renderAdminPage);
+    app.get('/api/admin/emailers/smtpssl', renderAdminPage);
 
 
     callback();
