@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-emailer-ssl-smtp",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "NodeBB plugin to send emails via an SMTP service",
   "keywords": [
     "nodebb",
