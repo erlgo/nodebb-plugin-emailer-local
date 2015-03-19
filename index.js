@@ -1,6 +1,6 @@
 var fs = require('fs'),
     path = require('path'),
-
+    _ = require('underscore'),
     winston = module.parent.require('winston'),
     Meta = module.parent.require('./meta'),
     Emailer = {};
@@ -25,11 +25,22 @@ Emailer.init = function(args,callback) {
 Emailer.send = function(data) {
     var username = Meta.config['emailer:local:username'];
     var pass = Meta.config['emailer:local:password'];
+    var additionalOptions;
+
+    try {
+      additionalOptions = JSON.parse(Meta.config['emailer:local:additionaloptions']);
+    } catch(err){
+      winston.warn('[emailer.smtp] options parse error ' + err);
+      additionalOptions = {};
+    }
+
     var transportOptions = {
       secure: true,
         host: Meta.config['emailer:local:host'],
         port: parseInt(Meta.config['emailer:local:port'],10)
     };
+    _.extend(additionalOptions, transportOptions);
+
     if( username || pass ) {
         transportOptions.auth = {
             user: username,
@@ -37,6 +48,15 @@ Emailer.send = function(data) {
         };
     }
     var transport = nodemailer.createTransport(smtpTransport(transportOptions));
+    transport.on('log', function(event){
+      var log;
+      try {
+        log = JSOO.parse(event);
+      } catch (err) {
+        log = event;
+      }
+      winston.info('[emailer.smtp] Log: ' + log);
+    });
     transport.sendMail({
         from: data.from,
         to: data.to,
