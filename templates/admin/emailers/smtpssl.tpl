@@ -39,12 +39,12 @@
 					<!-- If you're using an older commit, use type="text". Or pulling the up-to-date version would be even better ;) -->
 				</div>
 			</div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="emailer:local:additionaloptions">Additional options in JSON format</label>
-                    <textarea rows="6" class="form-control" id="emailer:local:additionaloptions" data-field="emailer:local:additionaloptions" ></textarea>
-                </div>
-            </div>
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="emailer:local:additionaloptions">Additional options in JSON format</label>
+					<textarea rows="6" class="form-control" id="emailer:local:additionaloptions" data-field="emailer:local:additionaloptions" ></textarea>
+				</div>
+			</div>
 		</div>
 
 		<button class="btn btn-lg btn-primary" id="save">Save</button>

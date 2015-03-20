@@ -34,12 +34,11 @@ Emailer.send = function(data) {
       additionalOptions = {};
     }
 
-    var transportOptions = {
+    var transportOptions = _.extend(additionalOptions, {
       secure: true,
-        host: Meta.config['emailer:local:host'],
-        port: parseInt(Meta.config['emailer:local:port'],10)
-    };
-    _.extend(additionalOptions, transportOptions);
+      host: Meta.config['emailer:local:host'],
+      port: parseInt(Meta.config['emailer:local:port'],10)
+    });
 
     if( username || pass ) {
         transportOptions.auth = {
@@ -47,11 +46,12 @@ Emailer.send = function(data) {
             pass: pass
         };
     }
+
     var transport = nodemailer.createTransport(smtpTransport(transportOptions));
     transport.on('log', function(event){
       var log;
       try {
-        log = JSOO.parse(event);
+        log = JSON.stringify(event, null, 2);
       } catch (err) {
         log = event;
       }
