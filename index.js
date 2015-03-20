@@ -18,7 +18,6 @@ Emailer.init = function(args,callback) {
     app.get('/admin/emailers/smtpssl', middleware.admin.buildHeader,[], renderAdminPage);
     app.get('/api/admin/emailers/smtpssl', renderAdminPage);
 
-
     callback();
 };
 

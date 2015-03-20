@@ -34,9 +34,7 @@
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="emailer:local:password">Password</label>
-					<!-- Only after https://github.com/designcreateplay/NodeBB/commit/6f129d9c68f998c9de08618c9b56f06f6841abd7 -->
 					<input type="password" class="form-control" id="emailer:local:password" data-field="emailer:local:password" />
-					<!-- If you're using an older commit, use type="text". Or pulling the up-to-date version would be even better ;) -->
 				</div>
 			</div>
 			<div class="col-sm-12">
@@ -44,6 +42,17 @@
 					<label for="emailer:local:additionaloptions">Additional options in JSON format</label>
 					<textarea rows="6" class="form-control" id="emailer:local:additionaloptions" data-field="emailer:local:additionaloptions" ></textarea>
 				</div>
+                <p>e.g.
+                    <code>
+                        {
+                        "debug": true,
+                        "tls": {
+                            "rejectUnauthorized": false
+                            }
+                        }
+                    </code>
+                </p>
+                <p>Documentation: <a href="https://github.com/andris9/nodemailer-smtp-transport#usage">https://github.com/andris9/nodemailer-smtp-transport#usage</a></p>
 			</div>
 		</div>
 
