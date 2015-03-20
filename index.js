@@ -34,11 +34,11 @@ Emailer.send = function(data) {
       additionalOptions = {};
     }
 
-    var transportOptions = _.extend(additionalOptions, {
+    var transportOptions = _.extend({
       secure: true,
       host: Meta.config['emailer:local:host'],
       port: parseInt(Meta.config['emailer:local:port'],10)
-    });
+    }, additionalOptions);
 
     if( username || pass ) {
         transportOptions.auth = {
